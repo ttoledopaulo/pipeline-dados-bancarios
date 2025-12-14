@@ -1,0 +1,14 @@
+
+services:
+  spark:
+    build: .
+    container_name: spark-pipeline
+    volumes:
+      - ./src:/project/src
+      - ./data:/project/data
+    working_dir: /project
+    command: >
+      /opt/spark/bin/spark-submit
+      --conf spark.driver.extraPythonPath=/app
+      --conf spark.executor.extraPythonPath=/app
+      src/pipeline.py
